@@ -897,6 +897,7 @@ if (
 }
 
 
+
 /* =========================================================
    INICIO
 ========================================================= */
@@ -906,3 +907,180 @@ updateProgress();
 console.log(
     "IA · EDUCACIÓN — Página interactiva cargada correctamente."
 );
+
+/* =========================================================
+   INVESTIGACIÓN DE CAMPO · ANIMACIÓN DE RESULTADOS
+========================================================= */
+
+const resultsSection = document.querySelector("#s11");
+
+if (resultsSection) {
+
+    let resultsAnimated = false;
+
+    function animateResults() {
+
+        if (resultsAnimated) {
+            return;
+        }
+
+        resultsAnimated = true;
+
+
+        /* =====================================================
+           CONTADORES DE PARTICIPANTES
+        ===================================================== */
+
+        const counters =
+            resultsSection.querySelectorAll("[data-count]");
+
+        counters.forEach(counter => {
+
+            const target =
+                Number(counter.dataset.count);
+
+            const duration = 1200;
+
+            const startTime =
+                performance.now();
+
+            function updateCounter(currentTime) {
+
+                const elapsed =
+                    currentTime - startTime;
+
+                const progress =
+                    Math.min(
+                        elapsed / duration,
+                        1
+                    );
+
+                const ease =
+                    1 - Math.pow(
+                        1 - progress,
+                        3
+                    );
+
+                const current =
+                    Math.floor(
+                        target * ease
+                    );
+
+                counter.textContent =
+                    current;
+
+                if (progress < 1) {
+
+                    requestAnimationFrame(
+                        updateCounter
+                    );
+
+                } else {
+
+                    counter.textContent =
+                        target;
+
+                }
+            }
+
+            requestAnimationFrame(
+                updateCounter
+            );
+
+        });
+
+
+        /* =====================================================
+           BARRAS DE FRECUENCIA DE USO
+        ===================================================== */
+
+        const bars =
+            resultsSection.querySelectorAll(
+                ".bar-fill"
+            );
+
+        bars.forEach(
+            (bar, index) => {
+
+                const width =
+                    bar.dataset.width;
+
+                setTimeout(
+                    () => {
+
+                        bar.style.width =
+                            width + "%";
+
+                    },
+                    index * 180
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           BARRAS DE BENEFICIOS
+        ===================================================== */
+
+        const benefits =
+            resultsSection.querySelectorAll(
+                ".benefit-fill"
+            );
+
+        benefits.forEach(
+            (bar, index) => {
+
+                const width =
+                    bar.dataset.width;
+
+                setTimeout(
+                    () => {
+
+                        bar.style.width =
+                            width + "%";
+
+                    },
+                    300 + index * 180
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       DETECTAR CUANDO S11 APARECE EN PANTALLA
+    ===================================================== */
+
+    const resultsObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            animateResults();
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.25
+            }
+        );
+
+
+    resultsObserver.observe(
+        resultsSection
+    );
+
+}

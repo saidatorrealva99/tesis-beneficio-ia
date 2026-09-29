@@ -587,11 +587,11 @@ h1 span {
             var(--cyan)
         );
 
-   .titulo {
-    background: linear-gradient(90deg, red, black);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+    -webkit-background-clip:
+        text;
+
+    color:
+        transparent;
 
 }
 
@@ -623,11 +623,11 @@ h2 {
             var(--cyan)
         );
 
-    .titulo {
-    background: linear-gradient(90deg, red, black);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+    -webkit-background-clip:
+        text;
+
+    color:
+        transparent;
 
 }
 
@@ -2558,5 +2558,26 @@ footer {
             rotate(90deg);
 
     }
+    /* =========================================================
+   INVESTIGACIÓN DE CAMPO · GRÁFICOS Y PARTICIPANTES
+========================================================= */
 
+.results-section {
+    position: relative;
+}
+
+.data-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    max-width: 950px;
+    margin: 0 auto 45px;
+    padding: 22px 25px;
+    border: 1px solid rgba(97,231,225,.25);
+    border-radius: 18px;
+    background: rgba(255,255,255,.035);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 40px rgba(0,0,0,.20);
+
+    }
 }
